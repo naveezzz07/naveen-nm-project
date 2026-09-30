@@ -1,151 +1,91 @@
-========================================================================
-LegalEase: AI-Powered Legal Document Generator
+# LegalEase – AI-Powered Legal Document Generator
 
-PROJECT OVERVIEW
+LegalEase is an AI-powered legal document generation platform designed to simplify the creation of professional legal documents. It uses Generative AI to create customizable and editable documents based on user inputs such as document type, parties involved, terms, and effective dates. The platform supports documents such as contracts, NDAs, lease agreements, and employment-related documents.
 
-LegalEase leverages state-of-the-art Generative AI to simplify the creation
-of legal documents by providing customizable, accurate, and editable
-templates for a wide range of use cases. Users can generate employment
-contracts, lease agreements, NDAs, and more—all tailored to their specific
-inputs like involved parties, effective dates, and key terms.
+## Features
 
-Built with FastAPI and integrated with a powerful AI core, LegalEase ensures
-users receive professional-grade legal documents that maintain formatting
-standards, include custom branding (such as logos and footers), and support
-features like editable previews and automatic term formatting. With secure
-handling of sensitive user data and seamless document export options
-(.PDF, .DOCX, .TXT), the platform bridges the gap between accessibility
-and legal professionalism.
+* 🤖 AI-powered legal document generation
+* 📄 Generate contracts, NDAs, agreements, lease agreements, and more
+* ✏️ Edit generated documents before downloading
+* 👀 Preview generated documents
+* 📥 Download documents as `.TXT`, `.DOCX`, or `.PDF`
+* 🏢 Support for branding such as logos and formatted documents
+* 📋 Automatic formatting of terms and clauses
+* 🔐 Secure handling of sensitive user information
+* 🖥️ User-friendly Streamlit interface
 
-LegalEase empowers entrepreneurs, professionals, and individuals to generate
-reliable legal content confidently—without needing a legal background.
+## Technologies Used
 
-KEY FEATURES
+* Python
+* FastAPI
+* Streamlit
+* Google Gemini API
+* python-docx
+* FPDF
+* Pillow
+* Requests
+* python-dotenv
 
-AI-Driven Generation: Powered by Google's Gemini 1.5 Pro model for
-accurate legal structure and terms.
+## How It Works
 
-Interactive Frontend: User-friendly interface built with Streamlit.
+1. Enter the type of legal document you want to create.
+2. Provide the parties involved, terms and conditions, and effective date.
+3. LegalEase sends the information to the AI model.
+4. The AI generates a structured legal document.
+5. Preview and edit the generated content.
+6. Download the final document in TXT, DOCX, or PDF format.
 
-Fast API Backend: High-performance RESTful API powering document logic.
+## Project Architecture
 
-Dynamic Preview & Editing: Live HTML text preview with inline editing
-capabilities before finalized export.
+**Frontend:** Streamlit
+**Backend:** FastAPI
+**AI Integration:** Google Gemini
+**Document Generation:** Python libraries for DOCX, PDF, and TXT formatting.
 
-Multi-Format Export: Seamlessly download generated documents in
-.TXT, .DOCX, or .PDF formats.
+## Installation
 
-Custom Branding: Integrates corporate logos and custom footers into
-formatted documents (.DOCX and .PDF).
+```bash
+pip install fastapi uvicorn streamlit python-docx fpdf Pillow requests google-generativeai python-dotenv
+```
 
-PROJECT ARCHITECTURE
+Create a `.env` file and add your Gemini API key:
 
-+------------------------+
-|   User Interface       |  (Streamlit / app.py)
-|   - Inputs & Editing   |
-|   - Multi-format Export|
-+-----------+------------+
-|
-v
-+------------------------+
-|   FastAPI Backend      |  (main.py / routes.py)
-|   - Request Handling   |
-|   - Schema Validation  |
-+-----------+------------+
-|
-v
-+------------------------+
-|   AI Document Core     |  (ai_core/gemini_generator.py)
-|   - Google Gemini API  |
-+-----------+------------+
-|
-v
-+------------------------+
-| Formatted Downloads    |  (.TXT, .DOCX, .PDF)
-+------------------------+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
 
-PROJECT STRUCTURE
+## Running the Project
 
-LEGALEASE/
-│
-├── ai_core/
-│   ├── init.py
-│   ├── generator.py
-│   └── gemini_generator.py     # Gemini 1.5 Pro API integration logic
-│
-├── docs/                       # Project documentation
-│
-├── frontend/
-│   ├── init.py
-│   └── app.py                  # Streamlit UI interface
-│
-├── Image/
-│   ├── Logo.png                # Main logo
-│   └── inverseLogo.png         # Dark-themed logo
-│
-├── legalEaseAPI/
-│   ├── init.py
-│   ├── main.py                 # FastAPI application initialization
-│   └── routes.py               # API route definitions
-│
-├── .env                        # Environment variables (API Keys)
-├── config.py                   # Configuration settings
-├── requirements.txt            # Project dependencies
-├── run.bat                     # Windows startup script
-└── run.sh                      # Shell startup script
+Start the FastAPI backend:
 
-PREREQUISITES & INSTALLATION
+```bash
+uvicorn main:app --reload
+```
 
-Python 3.10+ installed on your system.
+Then start the Streamlit frontend:
 
-Obtain a Google Gemini API Key from Google AI Studio.
+```bash
+streamlit run app.py
+```
 
-Setup Steps:
+Open the Streamlit URL shown in the terminal and start generating legal documents.
 
-Clone or extract the repository and navigate to the project root:
-cd LegalEase
+## Output Formats
 
-Create and activate a virtual environment:
-python -m venv venv
+LegalEase allows users to export generated documents in:
 
-On Windows:
-venv\Scripts\activate
+* `.txt` – Plain text
+* `.docx` – Formatted Microsoft Word document
+* `.pdf` – Branded PDF document with formatting, logo, and footer.
 
-On macOS/Linux:
-source venv/bin/activate
+## Future Enhancements
 
-Install required dependencies:
-pip install -r requirements.txt
+Future improvements can include deeper contract analysis, integration with legal databases, personalized recommendations, and expanded multilingual capabilities.
 
-Configure environment variables:
-Create a .env file in the root directory and add your API Key:
-GEMINI_API_KEY=your_google_gemini_api_key_here
+## Disclaimer
 
-HOW TO RUN THE APPLICATION
+LegalEase is an AI-powered document generation tool intended to assist users in creating and understanding legal documents. Generated content should be reviewed carefully and, when appropriate, verified by a qualified legal professional.
 
-Step 1: Start the FastAPI Backend
-uvicorn legalEaseAPI.main:app --reload
-(The backend running on http://127.0.0.1:8000)
+---
 
-Step 2: Start the Streamlit Frontend
-streamlit run frontend/app.py
-(Access the UI in your browser at http://localhost:8501)
-
-USAGE INSTRUCTIONS
-
-Enter the Document Type (e.g., NDA, Employment Contract, Lease Agreement).
-
-Input the Parties Involved (e.g., John Doe (Employer), Jane Smith (Employee)).
-
-Enter Terms & Conditions (separate each bullet point/clause using semicolons ';').
-
-Specify the Effective Date.
-
-Click "Generate Document".
-
-Preview the output in the dark-themed view or click "Click to Edit Document" to make custom adjustments.
-
-Click your preferred download button (.TXT, .DOCX, or .PDF).
-
-========================================================================
-Made by Naveen
+### Made by Naveen
